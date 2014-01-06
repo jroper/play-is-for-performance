@@ -15,7 +15,9 @@ object includeCode {
     val content = segment match {
       case Some(s) =>
         val sep = "#" + s
-        file.lines().dropWhile(!_.contains(sep)).drop(1).takeWhile(!_.contains(sep)).mkString("\n")
+        val sepLine :: block = file.lines().toList.dropWhile(!_.contains(sep))
+        val spaces = sepLine.takeWhile(_ == " ")
+        block.takeWhile(!_.contains(sep)).map(_.replaceFirst(spaces, "")).mkString("\n")
       case None => file.string
     }
 

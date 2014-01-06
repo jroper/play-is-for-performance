@@ -1,13 +1,13 @@
-package examples.asyncvssync
+package examples
 
 import scala.concurrent.{Await, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
 import utils.PerformanceTester
 import scala.concurrent.duration.Duration
 
-//#content
 object AsyncVsSync {
 
+  //#content
   def syncSum(numbers: Seq[Int]): Int = {
     numbers.reduce(_ + _)
   }
@@ -24,6 +24,6 @@ object AsyncVsSync {
       )
     )
   )
+  //#content
 }
-//#content
 

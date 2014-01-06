@@ -1,0 +1,13 @@
+@main("Avoiding context switches", routes.Slides.customContexts2, routes.Slides.executionContexts4) {
+    @points {
+        @point {
+            Immediate Execution Context
+            @points {
+                @point {
+                    Simply invokes run() immediately
+                    @includeCode("app/examples/CustomContexts.scala", "immediate-ec")
+                }
+            }
+        }
+    }
+}

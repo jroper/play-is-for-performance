@@ -11,7 +11,6 @@ define(["webjars!jquery.js"], function() {
         this.prevSlide = slideLink("prevSlide");
         this.remainingPoints = [];
         this.viewedPoints = [];
-        this.blackOut = false;
 
         var points = $(".point, .action");
         if (location.search.indexOf("prev") >= 0) {
@@ -22,7 +21,12 @@ define(["webjars!jquery.js"], function() {
             }
         } else {
             for (var i = 0; i < points.length; i++) {
-                this.remainingPoints[i] = $(points[i]);
+                var point = $(points[i]);
+                if (i == 0 && !point.hasClass("action")) {
+                    point.show();
+                } else {
+                    this.remainingPoints[i] = point;
+                }
             }
             this.remainingPoints.reverse();
         }

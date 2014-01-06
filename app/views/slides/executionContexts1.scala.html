@@ -1,0 +1,15 @@
+@main("Context switches", routes.Slides.executionContexts2, routes.Slides.async2) {
+    @points {
+        @point {
+            When does Play context switch?
+            @points {
+                @point("map/flatMap on future")
+                @point("Practically all the time in iteratees")
+                @point {
+                    Any time a function accepts an implicit ExecutionContext
+                    @includeCode("app/examples/ExecutionContexts.scala", "map-ec")
+                }
+            }
+        }
+    }
+}

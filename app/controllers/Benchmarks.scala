@@ -13,14 +13,19 @@ import scala.concurrent._
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import akka.actor.Cancellable
 import scala.util.{Failure, Success}
-import examples.asyncvssync.AsyncVsSync
 import play.api.Logger
 import java.lang.management.ManagementFactory
 import play.api.libs.Comet.CometMessage
+import examples.{CustomContexts, ExecutionContexts, AsyncVsSync}
 
 object Benchmarks extends Controller {
 
   def asyncVsSync = benchmark(AsyncVsSync.performanceTest)
+
+  def executionContexts = benchmark(ExecutionContexts.performanceTest)
+
+  def customContexts1 = benchmark(CustomContexts.immediatePerformanceTest)
+  def customContexts2 = benchmark(CustomContexts.trampolineTest)
 
   case class Event(name: String, data: JsValue)
   object Event {

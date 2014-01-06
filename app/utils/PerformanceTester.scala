@@ -6,11 +6,11 @@ import scala.Predef._
 object PerformanceTester {
   @volatile var executionContext: Option[ExecutionContextExecutorService] = None
 
-  def compare[I](times: Int, input: I)(tests: (String, I => Unit)*) =
+  def compare[I](times: Int, input: => I)(tests: (String, I => Unit)*) =
     new PerformanceTester(times, input, tests)
 }
 
-class PerformanceTester[I](times: Int, input: I, tests: Seq[(String, I => Unit)]) {
+class PerformanceTester[I](times: Int, input: => I, tests: Seq[(String, I => Unit)]) {
   
   def start(): PerformanceTestProgressAccessor = {
     
@@ -24,8 +24,9 @@ class PerformanceTester[I](times: Int, input: I, tests: Seq[(String, I => Unit)]
       val results = testsWithProgress.map {
         case (testName, test, progress) =>
           val start = System.currentTimeMillis()
+          val theInput = input
           for (i <- 1 to times) {
-            test(input)
+            test(theInput)
             progress.times += 1
           }
           val time = System.currentTimeMillis() - start

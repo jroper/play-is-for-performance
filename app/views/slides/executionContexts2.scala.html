@@ -1,0 +1,8 @@
+@main("Why execution contexts?", routes.Slides.executionContexts3, routes.Slides.executionContexts1) {
+    @points {
+        @point {
+            Prevent expensive/blocking operations from happening on wrong thread
+            @includeCode("app/examples/ExecutionContexts.scala", "ec-methods")
+        }
+    }
+}
