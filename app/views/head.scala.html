@@ -1,0 +1,15 @@
+@(title: String, nextSlide: Call = null, prevSlide: Call = null)
+
+<head>
+    <title>@title</title>
+    @for(next <- Option(nextSlide)) {
+        <link rel="nextSlide" href="@next"/>
+    }
+    @for(prev <- Option(prevSlide)) {
+        <link rel="prevSlide" href="@prev"/>
+    }
+    <link rel="stylesheet" media="screen" type="text/css" href="@routes.Assets.at("main.css")"/>
+    <link rel="stylesheet" media="screen" type="text/css" href="@routes.WebJarAssets.at(WebJarAssets.locate("prettify.css"))" />
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")"/>
+    <script data-main='@routes.Assets.at("javascripts/main.js")' type='text/javascript' src='@routes.WebJarAssets.requirejs()'></script>
+</head>

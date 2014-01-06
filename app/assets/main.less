@@ -1,0 +1,78 @@
+@fontsize: 24pt;
+
+h1, h2, h3, h4, p, li {
+  font-family: "HelveticaNeue-CondensedBold", sans-serif;
+}
+
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+.container {
+  min-height: 100%;
+  position: relative;
+}
+
+.content {
+  padding: 0;
+  padding-bottom: 60px;
+  margin: 0 auto;
+  width: 80%;
+}
+
+header {
+  margin: 0;
+  padding: 0 0 20px;
+  width: 100%;
+  min-height: 80px;
+  background-color: #92d13d;
+}
+
+h1 {
+  color: #fff;
+  padding: 20px 0 0 60px;
+  margin: 0;
+  font-size: 36pt;
+}
+
+footer {
+  width: 100%;
+  height: 60px;
+  background-color: #444;
+  position: absolute;
+  bottom: 0;
+}
+
+pre {
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16pt;
+}
+
+.point {
+  display: none;
+  font-size: @fontsize;
+}
+
+.blackOut {
+  position: fixed;
+  display: none;
+  background-color: black;
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
+}
+
+.centre {
+  text-align: center;
+  font-size: 16pt;
+}
+
+.img {
+  text-align: center;
+  margin: 10px;
+}
+
+@import "benchmark";

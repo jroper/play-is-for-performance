@@ -1,0 +1,40 @@
+@(url: Call)
+
+<div class="performanceTest" data-url="@url">
+
+    <div class="buttonContainer">
+        <button class="start action">Start Benchmark</button>
+    </div>
+
+    <div class="stats">
+        <div class="stat cpuUsage">
+            <div class="gauge">
+                <div class="bar"></div>
+                <div class="needle"><div></div></div>
+            </div>
+            <div class="statTitle">CPU Usage</div>
+        </div>
+        <div class="stat memoryUsage">
+            <div class="gauge">
+                <div class="bar"></div>
+                <div class="needle"><div></div></div>
+            </div>
+            <div class="statTitle">Memory Usage</div>
+        </div>
+        <div class="stat loadAverage">
+            <div class="gauge">
+                <div class="bar"></div>
+                <div class="needle"><div></div></div>
+            </div>
+            <div class="statTitle">Load Average</div>
+        </div>
+
+    </div>
+
+    <ul class="tests">
+    </ul>
+
+    <div class="results">
+    </div>
+</div>
+

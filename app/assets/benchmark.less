@@ -1,0 +1,109 @@
+.performanceTest {
+
+  .buttonContainer {
+    width: 200px;
+    margin: 20px auto;
+    button {
+      width: 200px;
+      height: 60px;
+      font-size: 14pt;
+      background: linear-gradient(#ee5e3d, #cc3512 70%);
+      box-shadow: #f49883 0 1px 0 inset;
+      border: 1px solid #b52f10;
+      color: white;
+      text-shadow: #96270d 0 -1px 0;
+      border-radius: 8px;
+    }
+    button:disabled {
+      background: linear-gradient(#edbdb2, #cc8e81 70%);
+      box-shadow: #f49883 0 1px 0 inset;
+      border: 1px solid #b37e72;
+      color: #eee;
+      text-shadow: #94685f 0 -1px 0;
+    }
+  }
+
+  .tests {
+    display: none;
+    margin: 0 auto;
+    padding: 0;
+    width: 720px;
+
+    li {
+      list-style-type: none;
+      margin: 5px;
+      padding: 0;
+
+      .testName {
+        float: left;
+      }
+
+      .progressBar {
+        margin-left: 120px;
+        display: block;
+        width: 500px;
+        height: 1.2em;
+        border: 1px solid #888;
+        border-radius: 5px;
+
+        .progress {
+          display: block;
+          height: 1.2em;
+          width: 0;
+          background-color: #4488CC;
+          border-radius: 5px;
+        }
+      }
+
+    }
+  }
+
+  .results {
+    display: none;
+    margin: 0 auto;
+    width: 400px;
+  }
+
+  .stats {
+    margin: 0 auto;
+    display: none;
+    width: 400px;
+    .stat {
+      display: inline-block;
+      width: 120px;
+      .statTitle {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .gauge {
+    width: 100px;
+    height: 80px;
+    margin: 0;
+
+    .bar {
+      position: absolute;
+      width: 80px;
+      height: 150px;
+      margin: 10px 0 0 -20px;
+      border: 30px solid transparent;
+      border-top-color: #88FF88;
+      border-radius: 50%;
+      transition: border-top-color 300ms;
+    }
+    .needle {
+      position: absolute;
+      height: 140px;
+      -webkit-transform: rotate(-50deg);
+      transition: -webkit-transform 300ms;
+      div {
+        width: 4px;
+        margin: 0 48px;
+        height: 70px;
+        background-color: black;
+        border-radius: 70% 70% 2px 2px;
+      }
+    }
+  }
+}

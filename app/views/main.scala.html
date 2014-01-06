@@ -1,0 +1,19 @@
+@(title: String, nextSlide: Call = null, prevSlide: Call = null)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    @head(title, nextSlide, prevSlide)
+    <body>
+        <div class="blackOut"></div>
+        <div class="container">
+            <header>
+                <h1>@title</h1>
+            </header>
+            <div class="content">
+                @content
+            </div>
+            <footer></footer>
+        </div>
+    </body>
+</html>

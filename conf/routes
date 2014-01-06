@@ -1,0 +1,24 @@
+
+GET        /webjars/require.js          controllers.WebJarAssets.requirejs
+GET        /webjars/*file               controllers.WebJarAssets.at(file)
+GET        /assets/*file                controllers.Assets.at(path="/public", file)
+
+GET        /                            controllers.Slides.title
+
+GET        /yourHost                    controllers.Slides.yourHost
+
+GET        /notAbout1                   controllers.Slides.notAbout1
+
+GET        /useCases1                   controllers.Slides.useCases1
+GET        /useCases2                   controllers.Slides.useCases2
+GET        /useCases3                   controllers.Slides.useCases3
+GET        /useCases4                   controllers.Slides.useCases4
+
+GET        /asyncVsSync1                controllers.Slides.asyncVsSync1
+GET        /asyncVsSync2                controllers.Slides.asyncVsSync2
+GET        /asyncVsSync3                controllers.Slides.asyncVsSync3
+GET        /asyncVsSyncBenchmark        controllers.Benchmarks.asyncVsSync
+GET        /async1                      controllers.Slides.async1
+GET        /async2                      controllers.Slides.async2
+
+

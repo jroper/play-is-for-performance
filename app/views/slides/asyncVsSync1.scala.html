@@ -1,0 +1,14 @@
+@main("Asynchronous vs Synchronous", routes.Slides.asyncVsSync2, routes.Slides.useCases4) {
+
+    @points {
+        @point("Asynchronous != faster")
+        @point("Often asynchronous is slower")
+        @point {
+            More context switches
+            @points {
+                @point("Each context switch takes time")
+                @point("Sometimes unnecessary but forced")
+            }
+        }
+    }
+}
