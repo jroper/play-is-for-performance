@@ -1,0 +1,7 @@
+@main("CSRF", routes.Slides.csrf2, routes.Slides.routing5) {
+    @points {
+        @point("Filters only have access to the request body as a stream")
+        @point("Once you've consumed/parsed the stream, it's gone, unless you buffered it")
+        @point("CSRF filter buffers the stream, parses it, and then feeds it back into the down stream filter")
+    }
+}

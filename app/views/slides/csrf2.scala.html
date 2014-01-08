@@ -1,0 +1,13 @@
+@main("CSRF", routes.Slides.csrf3, routes.Slides.csrf1) {
+    @points {
+        @point("Solution 1: Place CSRF token into query string")
+        @point {
+            Instead of having the CSRF token as a form field, like
+            @includeCode("app/views/csrfQueryString.scala.html", "form-field")
+        }
+        @point {
+            Add it to the query string
+            @includeCode("app/views/csrfQueryString.scala.html", "query-string")
+        }
+    }
+}

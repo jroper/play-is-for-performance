@@ -55,36 +55,36 @@ define(["webjars!jquery.js", "webjars!Chart.js"], function() {
                 self.resultsElem.empty();
                 self.resultsElem.show();
 
-                if (data.results.length == 1) {
+                var canvas = $("<canvas>").attr({width: 400, height: 400});
+                self.resultsElem.append(canvas);
 
-                    self.resultsElem.append(
-                        $("<div>").addClass("singleResult").text("Benchmark completed in: " + data.results[0].time + "ms")
-                    );
+                var ctx = canvas.get(0).getContext("2d");
 
-                } else {
-
-                    var canvas = $("<canvas>").attr({width: 400, height: 400});
-                    self.resultsElem.append(canvas);
-
-                    var ctx = canvas.get(0).getContext("2d");
-
-                    var labels = [];
-                    var points = [];
-                    for (var i = 0; i < data.results.length; i++) {
-                        var result = data.results[i];
-                        labels[i] = result.name;
-                        points[i] = result.time;
-                    }
-
-                    new Chart(ctx).Bar({
-                        labels: labels,
-                        datasets: [{
-                            data: points,
-                            fillColor : "rgba(151,187,205,0.5)",
-                            strokeColor : "rgba(151,187,205,1)"
-                        }]
-                    }, {});
+                var labels = [];
+                var points = [];
+                var maxTime = 0;
+                for (var i = 0; i < data.results.length; i++) {
+                    var result = data.results[i];
+                    labels[i] = result.name;
+                    points[i] = result.time;
+                    maxTime = Math.max(maxTime, result.time);
                 }
+
+                var stepWidth = Math.ceil(maxTime / 20)
+
+                new Chart(ctx).Bar({
+                    labels: labels,
+                    datasets: [{
+                        data: points,
+                        fillColor : "rgba(151,187,205,0.5)",
+                        strokeColor : "rgba(151,187,205,1)"
+                    }]
+                }, {
+                    scaleOverride: true,
+                    scaleStartValue: 0,
+                    scaleSteps: 21,
+                    scaleStepWidth: stepWidth
+                });
 
                 events.close();
             });

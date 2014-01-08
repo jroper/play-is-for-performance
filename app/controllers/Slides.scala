@@ -55,4 +55,15 @@ object Slides extends Controller {
   def routing3 = slide(slides.routing3)
   def routing4 = slide(slides.routing4)
   def routing5 = slide(slides.routing5)
+
+  def csrf1 = slide(slides.csrf1)
+  def csrf2 = slide(slides.csrf2)
+  def csrf3 = slide(slides.csrf3)
+  def csrf4 = slide(slides.csrf4)
+  def csrf5 = slide(slides.csrf5)
+  def csrf6 = slide(slides.csrf6)
+  def csrf7 = slide(slides.csrf7)
+
+  def conclusion = slide(slides.conclusion)
+  def cat = slide(slides.cat)
 }

@@ -19,6 +19,9 @@ define(["webjars!jquery.js"], function() {
                 point.show();
                 this.viewedPoints[i] = point;
             }
+            while (this.viewedPoints.length > 0 && this.viewedPoints[this.viewedPoints.length - 1].hasClass("action")) {
+                this.remainingPoints.push(this.viewedPoints.pop())
+            }
         } else {
             for (var i = 0; i < points.length; i++) {
                 var point = $(points[i]);

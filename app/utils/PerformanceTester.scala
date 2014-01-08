@@ -2,6 +2,7 @@ package utils
 
 import scala.concurrent._
 import scala.Predef._
+import java.util.concurrent.atomic.AtomicBoolean
 
 object PerformanceTester {
   @volatile var executionContext: Option[ExecutionContextExecutorService] = None
@@ -9,15 +10,20 @@ object PerformanceTester {
   def compare[I](times: Int, input: => I)(tests: (String, I => Unit)*) =
     new PerformanceTester(times, input, tests)
 
+  def compare(times: Int)(tests: (String, Unit => Unit)*) =
+    new PerformanceTester(times, (), tests)
+
   def run(times: Int)(test: => Unit) = {
     new PerformanceTester(times, (), Seq("Test" -> ((u: Unit) => test)))
   }
 }
 
 class PerformanceTester[I](times: Int, input: => I, tests: Seq[(String, I => Unit)]) {
-  
+
   def start(): PerformanceTestProgressAccessor = {
-    
+
+    val running = new AtomicBoolean(true)
+
     val testsWithProgress = tests.map {
       case (testName, test) => (testName, test, new Progress)
     }
@@ -29,7 +35,7 @@ class PerformanceTester[I](times: Int, input: => I, tests: Seq[(String, I => Uni
         case (testName, test, progress) =>
           val start = System.currentTimeMillis()
           val theInput = input
-          for (i <- 1 to times) {
+          while (progress.times < times && running.get()) {
             test(theInput)
             progress.times += 1
           }
@@ -44,6 +50,7 @@ class PerformanceTester[I](times: Int, input: => I, tests: Seq[(String, I => Uni
       def currentProgress = testsWithProgress.map {
         case (testName, test, progress) => (testName, progress.times * 100 / times)
       }
+      def stop() = running.set(false)
     }
   }
 
@@ -56,6 +63,7 @@ class PerformanceTester[I](times: Int, input: => I, tests: Seq[(String, I => Uni
 trait PerformanceTestProgressAccessor {
   def currentProgress: Seq[(String, Int)]
   def results: Future[PerformanceTestResults]
+  def stop(): Unit
 }
 
 case class PerformanceTestResults(results: Seq[(String, Long)])

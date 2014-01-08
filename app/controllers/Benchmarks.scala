@@ -38,6 +38,9 @@ object Benchmarks extends Controller {
 
   def routing = benchmark(Routing.performanceTest)
 
+  def csrf1 = benchmark(CsrfSolutions.QueryString.performanceTest)
+  def csrf2 = benchmark(CsrfSolutions.CsrfAction.performanceTest)
+
   case class Event(name: String, data: JsValue)
   object Event {
     def apply[D : Writes](name: String, data: D) = new Event(name, Json.toJson(data))
@@ -65,8 +68,12 @@ object Benchmarks extends Controller {
     val accessor = tester.start()
     
     val poller = Promise[Cancellable]()
-    def cancelPoller() = poller.future.foreach(_.cancel())
-    
+
+    def shutDown() = {
+      accessor.stop()
+      poller.future.foreach(_.cancel())
+    }
+
     val enumerator = Concurrent.unicast[Event](onStart = { channel =>
 
       // Every 200 milliseconds, send a progress update
@@ -77,20 +84,20 @@ object Benchmarks extends Controller {
       // When the performance test is finished
       accessor.results.onComplete {
         case Success(results) =>
-          Logger.info("Benchmark done")
-          cancelPoller()
+          Logger.info("Benchmark done: " + results)
+          shutDown()
           channel.push(Event("results", TestResults(results.results.map(TestResult.tupled))))
         case Failure(e) =>
           Logger.info("Benchmark error")
-          cancelPoller()
+          shutDown()
           channel.push(Event("error", TestError(e.getClass.getName, Option(e.getMessage))))
       }
 
     }, onComplete = {
       Logger.info("Client disconnect")
-      cancelPoller()
+      shutDown()
     }, onError = {
-      case e => cancelPoller()
+      case e => shutDown()
     })
 
     Ok.feed(enumerator &> EventSource[Event]).as("text/event-stream")

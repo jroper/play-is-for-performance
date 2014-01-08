@@ -8,6 +8,7 @@ play.Project.playScalaSettings
 
 libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-test" % PlayVersion.current,
+  filters,
   "com.github.scala-incubator.io" %% "scala-io-file" % "0.4.2",
   "org.webjars" %% "webjars-play" % "2.2.1",
   "org.webjars" % "prettify" % "4-Mar-2013",

@@ -1,0 +1,15 @@
+@()(implicit req: RequestHeader)
+
+@import helper._
+
+@* #form-field *@
+@form(routes.Application.save) {
+    @CSRF.formField
+@* #form-field *@
+}
+
+@* #query-string *@
+@form(CSRF(routes.Application.save)) {
+@* #query-string *@
+
+}
