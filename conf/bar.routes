@@ -1,0 +1,12 @@
+GET        /a        controllers.bar.Bar.a
+GET        /b        controllers.bar.Bar.b
+GET        /c        controllers.bar.Bar.c
+GET        /d        controllers.bar.Bar.d
+GET        /e        controllers.bar.Bar.e
+GET        /f        controllers.bar.Bar.f
+GET        /g        controllers.bar.Bar.g
+GET        /h        controllers.bar.Bar.h
+GET        /i        controllers.bar.Bar.i
+GET        /j        controllers.bar.Bar.j
+GET        /k        controllers.bar.Bar.k
+GET        /l        controllers.bar.Bar.l

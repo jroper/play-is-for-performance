@@ -1,43 +1,62 @@
 
-GET        /webjars/require.js                controllers.WebJarAssets.requirejs
-GET        /webjars/*file                     controllers.WebJarAssets.at(file)
-GET        /assets/*file                      controllers.Assets.at(path="/public", file)
+GET        /webjars/require.js                  controllers.WebJarAssets.requirejs
+GET        /webjars/*file                       controllers.WebJarAssets.at(file)
+GET        /assets/*file                        controllers.Assets.at(path="/public", file)
 
-GET        /                                  controllers.Slides.title
+GET        /                                    controllers.Slides.title
 
-GET        /yourHost                          controllers.Slides.yourHost
+GET        /yourHost                            controllers.Slides.yourHost
 
-GET        /notAbout1                         controllers.Slides.notAbout1
-GET        /notAbout2                         controllers.Slides.notAbout2
+GET        /notAbout1                           controllers.Slides.notAbout1
+GET        /notAbout2                           controllers.Slides.notAbout2
 
-GET        /useCases1                         controllers.Slides.useCases1
-GET        /useCases2                         controllers.Slides.useCases2
-GET        /useCases3                         controllers.Slides.useCases3
-GET        /useCases4                         controllers.Slides.useCases4
+GET        /useCases1                           controllers.Slides.useCases1
+GET        /useCases2                           controllers.Slides.useCases2
+GET        /useCases3                           controllers.Slides.useCases3
+GET        /useCases4                           controllers.Slides.useCases4
 
-GET        /asyncVsSync1                      controllers.Slides.asyncVsSync1
-GET        /asyncVsSync2                      controllers.Slides.asyncVsSync2
-GET        /asyncVsSync3                      controllers.Slides.asyncVsSync3
-GET        /asyncVsSyncBenchmark              controllers.Benchmarks.asyncVsSync
-GET        /async1                            controllers.Slides.async1
-GET        /async2                            controllers.Slides.async2
+GET        /asyncVsSync1                        controllers.Slides.asyncVsSync1
+GET        /asyncVsSync2                        controllers.Slides.asyncVsSync2
+GET        /asyncVsSync3                        controllers.Slides.asyncVsSync3
+GET        /asyncVsSyncBenchmark                controllers.Benchmarks.asyncVsSync
+GET        /async1                              controllers.Slides.async1
+GET        /async2                              controllers.Slides.async2
 
-GET        /executionContexts1                controllers.Slides.executionContexts1
-GET        /executionContexts2                controllers.Slides.executionContexts2
-GET        /executionContexts3                controllers.Slides.executionContexts3
-GET        /executionContexts4                controllers.Slides.executionContexts4
-GET        /executionContextsBenchmark        controllers.Benchmarks.executionContexts
+GET        /executionContexts1                  controllers.Slides.executionContexts1
+GET        /executionContexts2                  controllers.Slides.executionContexts2
+GET        /executionContexts3                  controllers.Slides.executionContexts3
+GET        /executionContexts4                  controllers.Slides.executionContexts4
+GET        /executionContextsBenchmark          controllers.Benchmarks.executionContexts
 
-GET        /customContexts1                   controllers.Slides.customContexts1
-GET        /customContexts2                   controllers.Slides.customContexts2
-GET        /customContexts3                   controllers.Slides.customContexts3
-GET        /customContexts4                   controllers.Slides.customContexts4
-GET        /customContexts5                   controllers.Slides.customContexts5
-GET        /customContexts6                   controllers.Slides.customContexts6
-GET        /customContexts7                   controllers.Slides.customContexts7
-GET        /customContexts8                   controllers.Slides.customContexts8
-GET        /customContextsBenchmark1          controllers.Benchmarks.customContexts1
-GET        /customContextsBenchmark2          controllers.Benchmarks.customContexts2
+GET        /customContexts1                     controllers.Slides.customContexts1
+GET        /customContexts2                     controllers.Slides.customContexts2
+GET        /customContexts3                     controllers.Slides.customContexts3
+GET        /customContexts4                     controllers.Slides.customContexts4
+GET        /customContexts5                     controllers.Slides.customContexts5
+GET        /customContexts6                     controllers.Slides.customContexts6
+GET        /customContexts7                     controllers.Slides.customContexts7
+GET        /customContexts8                     controllers.Slides.customContexts8
+GET        /customContextsBenchmark1            controllers.Benchmarks.customContexts1
+GET        /customContextsBenchmark2            controllers.Benchmarks.customContexts2
 
+GET        /resourceManagement1                 controllers.Slides.resourceManagement1
+GET        /resourceManagement2                 controllers.Slides.resourceManagement2
+GET        /resourceManagement3                 controllers.Slides.resourceManagement3
+GET        /resourceManagement4                 controllers.Slides.resourceManagement4
+GET        /resourceManagementBenchmark1        controllers.Benchmarks.resourceManagement1
+GET        /resourceManagementBenchmark2        controllers.Benchmarks.resourceManagement2
 
+GET        /prerender1                          controllers.Slides.prerender1
+GET        /prerender2                          controllers.Slides.prerender2
+GET        /prerender3                          controllers.Slides.prerender3
+GET        /prerender4                          controllers.Slides.prerender4
+GET        /prerenderBenchmark1                 controllers.Benchmarks.prerender1
+GET        /prerenderBenchmark2                 controllers.Benchmarks.prerender2
+
+GET        /routing1                            controllers.Slides.routing1
+GET        /routing2                            controllers.Slides.routing2
+GET        /routing3                            controllers.Slides.routing3
+GET        /routing4                            controllers.Slides.routing4
+GET        /routing5                            controllers.Slides.routing5
+GET        /routingBenchmark                    controllers.Benchmarks.routing
 

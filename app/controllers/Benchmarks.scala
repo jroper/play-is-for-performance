@@ -16,7 +16,10 @@ import scala.util.{Failure, Success}
 import play.api.Logger
 import java.lang.management.ManagementFactory
 import play.api.libs.Comet.CometMessage
-import examples.{CustomContexts, ExecutionContexts, AsyncVsSync}
+import examples._
+import scala.util.Failure
+import scala.Some
+import scala.util.Success
 
 object Benchmarks extends Controller {
 
@@ -26,6 +29,14 @@ object Benchmarks extends Controller {
 
   def customContexts1 = benchmark(CustomContexts.immediatePerformanceTest)
   def customContexts2 = benchmark(CustomContexts.trampolineTest)
+
+  def resourceManagement1 = benchmark(ResourceManagement.DumbController.performanceTest)
+  def resourceManagement2 = benchmark(ResourceManagement.SmartController.performanceTest)
+
+  def prerender1 = benchmark(Prerender.Static.performanceTest)
+  def prerender2 = benchmark(Prerender.AlmostStatic.performanceTest)
+
+  def routing = benchmark(Routing.performanceTest)
 
   case class Event(name: String, data: JsValue)
   object Event {
@@ -104,7 +115,7 @@ object Benchmarks extends Controller {
     val time = currentTime - lastMeasurementTime
     lastMeasurementTime = currentTime
     // time is in ms, sinceLast in ns, we want percent, so we multiply by 100 and divide by 1000000, total means divide by 10
-    val cpuUsage = (sinceLast / (time * 10000)) / noCpus
+    val cpuUsage = Math.max((sinceLast / (time * 10000)) / noCpus, 0)
     val loadAverage = os.getSystemLoadAverage
     val memoryUsage = memory.getHeapMemoryUsage
     val memoryPercent = (memoryUsage.getUsed * 100) / memoryUsage.getMax

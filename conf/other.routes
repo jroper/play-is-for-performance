@@ -1,0 +1,12 @@
+GET        /a        controllers.other.Other.a
+GET        /b        controllers.other.Other.b
+GET        /c        controllers.other.Other.c
+GET        /d        controllers.other.Other.d
+GET        /e        controllers.other.Other.e
+GET        /f        controllers.other.Other.f
+GET        /g        controllers.other.Other.g
+GET        /h        controllers.other.Other.h
+GET        /i        controllers.other.Other.i
+GET        /j        controllers.other.Other.j
+GET        /k        controllers.other.Other.k
+GET        /l        controllers.other.Other.l

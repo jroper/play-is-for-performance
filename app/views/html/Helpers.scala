@@ -36,6 +36,11 @@ object point {
     Html("<li" + {if (nav) " class='point'" else ""} + ">" + HtmlFormat.escape(p) + "</li>")
 }
 
+object item {
+  def apply(p: Html) =
+    Seq(Html("<span class='point'>"), p, Html("</span>"))
+}
+
 object image {
   def apply(width: Int, url: Call) = {
     Html("<img style='width:" + width + "px;' src='" + url.url + "'>")

@@ -1,0 +1,7 @@
+@main("When you have to block", routes.Slides.resourceManagement4, routes.Slides.resourceManagement2) {
+    @points {
+        @point("Configure dispatchers per type of operation")
+    }
+    @item(includeCode("app/examples/ResourceManagement.scala", "custom-executor"))
+    @item(includeCode("conf/application.conf", "blocking-executor"))
+}

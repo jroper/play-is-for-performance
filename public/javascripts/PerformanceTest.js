@@ -48,35 +48,43 @@ define(["webjars!jquery.js", "webjars!Chart.js"], function() {
                 var data = JSON.parse(e.data);
 
                 self.running = false;
-
-                self.resultsElem.empty();
-
-                self.button.removeAttr("disabled");
-                self.resultsElem.show();
                 self.statsElem.hide();
                 self.testsElem.hide();
+                self.button.removeAttr("disabled");
 
-                var canvas = $("<canvas>").attr({width: 400, height: 400});
-                self.resultsElem.append(canvas);
+                self.resultsElem.empty();
+                self.resultsElem.show();
 
-                var ctx = canvas.get(0).getContext("2d");
+                if (data.results.length == 1) {
 
-                var labels = [];
-                var points = [];
-                for (var i = 0; i < data.results.length; i++) {
-                    var result = data.results[i];
-                    labels[i] = result.name;
-                    points[i] = result.time;
+                    self.resultsElem.append(
+                        $("<div>").addClass("singleResult").text("Benchmark completed in: " + data.results[0].time + "ms")
+                    );
+
+                } else {
+
+                    var canvas = $("<canvas>").attr({width: 400, height: 400});
+                    self.resultsElem.append(canvas);
+
+                    var ctx = canvas.get(0).getContext("2d");
+
+                    var labels = [];
+                    var points = [];
+                    for (var i = 0; i < data.results.length; i++) {
+                        var result = data.results[i];
+                        labels[i] = result.name;
+                        points[i] = result.time;
+                    }
+
+                    new Chart(ctx).Bar({
+                        labels: labels,
+                        datasets: [{
+                            data: points,
+                            fillColor : "rgba(151,187,205,0.5)",
+                            strokeColor : "rgba(151,187,205,1)"
+                        }]
+                    }, {});
                 }
-
-                new Chart(ctx).Bar({
-                    labels: labels,
-                    datasets: [{
-                        data: points,
-                        fillColor : "rgba(151,187,205,0.5)",
-                        strokeColor : "rgba(151,187,205,1)"
-                    }]
-                }, {});
 
                 events.close();
             });

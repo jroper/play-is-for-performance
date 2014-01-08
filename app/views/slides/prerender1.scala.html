@@ -1,0 +1,13 @@
+@main("Pre rendering static pages", routes.Slides.prerender2, routes.Slides.resourceManagement4) {
+    @points {
+        @point {
+            Often some pages are basically static
+            @points {
+                @point("Still using templates for sharing main decorator or reverse routing")
+                @point("Main page in single page apps good example")
+            }
+        }
+        @point("Use val to pre-render")
+    }
+    @item(includeCode("app/examples/Prerender.scala", "static"))
+}

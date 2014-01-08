@@ -1,0 +1,12 @@
+GET        /a        controllers.foo.Foo.a
+GET        /b        controllers.foo.Foo.b
+GET        /c        controllers.foo.Foo.c
+GET        /d        controllers.foo.Foo.d
+GET        /e        controllers.foo.Foo.e
+GET        /f        controllers.foo.Foo.f
+GET        /g        controllers.foo.Foo.g
+GET        /h        controllers.foo.Foo.h
+GET        /i        controllers.foo.Foo.i
+GET        /j        controllers.foo.Foo.j
+GET        /k        controllers.foo.Foo.k
+GET        /l        controllers.foo.Foo.l

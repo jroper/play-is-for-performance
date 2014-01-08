@@ -8,6 +8,10 @@ object PerformanceTester {
 
   def compare[I](times: Int, input: => I)(tests: (String, I => Unit)*) =
     new PerformanceTester(times, input, tests)
+
+  def run(times: Int)(test: => Unit) = {
+    new PerformanceTester(times, (), Seq("Test" -> ((u: Unit) => test)))
+  }
 }
 
 class PerformanceTester[I](times: Int, input: => I, tests: Seq[(String, I => Unit)]) {
