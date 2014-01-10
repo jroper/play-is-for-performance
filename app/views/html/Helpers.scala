@@ -32,8 +32,15 @@ object points {
 object point {
   def apply(p: Html) =
     Seq(Html("<li class='point'>"), p, Html("</li>"))
-  def apply(p: String, nav: Boolean = true) =
-    Html("<li" + {if (nav) " class='point'" else ""} + ">" + HtmlFormat.escape(p) + "</li>")
+  def show(p: Html) = {
+    Seq(Html("<li>"), p, Html("</li>"))
+  }
+
+  def apply(p: String) =
+    Html("<li class='point'>" + HtmlFormat.escape(p) + "</li>")
+  def show(p: String) =
+    Html("<li>" + HtmlFormat.escape(p) + "</li>")
+
 }
 
 object item {

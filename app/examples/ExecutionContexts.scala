@@ -35,16 +35,7 @@ object ExecutionContexts {
 
   //#ec-test
   def performanceTest = PerformanceTester.compare(100, 100)(
-    "No-ExecutionContext" -> { times =>
-      val latch = new CountDownLatch(times)
-      asynchronously {
-        for (i <- 1 to times) {
-          immediate(latch, notSoImportantOp)
-        }
-      }
-      latch.await()
-    },
-    "ExecutionContext" -> { times =>
+    "With-EC" -> { times =>
       withNewEc { implicit ctx =>
         val latch = new CountDownLatch(times)
         asynchronously {
@@ -54,6 +45,15 @@ object ExecutionContexts {
         }
         latch.await()
       }
+    },
+    "No-EC" -> { times =>
+      val latch = new CountDownLatch(times)
+      asynchronously {
+        for (i <- 1 to times) {
+          immediate(latch, notSoImportantOp)
+        }
+      }
+      latch.await()
     }
   )
   //#ec-test

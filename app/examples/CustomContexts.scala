@@ -32,12 +32,12 @@ object CustomContexts {
 
   //#immediate-test
   val immediatePerformanceTest = PerformanceTester.compare(2000, 200)(
-    "Default" -> { times =>
-      import scala.concurrent.ExecutionContext.Implicits.global
-      add(times)
-    },
     "Immediate" -> { times =>
       implicit def ec = immediateExecutionContext
+      add(times)
+    },
+    "Default" -> { times =>
+      import scala.concurrent.ExecutionContext.Implicits.global
       add(times)
     }
   )
@@ -72,12 +72,12 @@ object CustomContexts {
 
   //#trampoline-test
   val trampolineTest = PerformanceTester.compare(200, 2000)(
-    "Default" -> { times =>
-      import scala.concurrent.ExecutionContext.Implicits.global
-      add(times)
-    },
     "Trampoline" -> { times =>
       implicit def ec = trampolineExecutionContext
+      add(times)
+    },
+    "Default" -> { times =>
+      import scala.concurrent.ExecutionContext.Implicits.global
       add(times)
     }
   )

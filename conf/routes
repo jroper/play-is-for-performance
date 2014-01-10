@@ -3,6 +3,8 @@ GET         /webjars/require.js                  controllers.WebJarAssets.requir
 GET         /webjars/*file                       controllers.WebJarAssets.at(file)
 GET         /assets/*file                        controllers.Assets.at(path="/public", file)
 
+GET         /warmup                              controllers.Benchmarks.runAll
+
 POST        /save                                controllers.Application.save
 
 GET         /                                    controllers.Slides.title

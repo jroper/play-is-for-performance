@@ -22,11 +22,11 @@ object Prerender {
     }
 
     def performanceTest = PerformanceTester.compare(1000, ())(
-      "Normal" -> { _ =>
-        contentAsString(normal(FakeRequest()))
-      },
       "Pre-rendered" -> { _ =>
         contentAsString(prerendered(FakeRequest()))
+      },
+      "Normal" -> { _ =>
+        contentAsString(normal(FakeRequest()))
       }
     )
     //#static
@@ -49,11 +49,11 @@ object Prerender {
     }
 
     def performanceTest = PerformanceTester.compare(1000, ())(
-      "Normal" -> { _ =>
-        contentAsString(normal(FakeRequest()))
-      },
       "Pre-rendered" -> { _ =>
         contentAsString(prerendered(FakeRequest()))
+      },
+      "Normal" -> { _ =>
+        contentAsString(normal(FakeRequest()))
       }
     )
     //#almost

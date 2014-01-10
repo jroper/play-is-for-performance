@@ -23,7 +23,12 @@ object Routing {
     }
 
     var _prefix = ""
-    def setPrefix(p: String) = _prefix = if (p == "/") "" else p
+    def setPrefix(p: String) = {
+      _prefix = if (p == "/") "" else p
+      foo.Routes.setPrefix(prefix + "/foo")
+      bar.Routes.setPrefix(prefix + "/bar")
+      other.Routes.setPrefix(prefix + "/other")
+    }
     def prefix = _prefix
     def documentation = Nil
   }
@@ -37,13 +42,13 @@ object Routing {
   }
 
   def performanceTest = PerformanceTester.compare(10000, ())(
-    "Built-In" -> { _ =>
-      combined.Routes.setPrefix("/")
-      runTest(combined.Routes)
-    },
     "Custom" -> { _ =>
       Custom.setPrefix("/")
       runTest(Custom)
+    },
+    "Built-In" -> { _ =>
+      combined.Routes.setPrefix("/")
+      runTest(combined.Routes)
     }
   )
   //#test

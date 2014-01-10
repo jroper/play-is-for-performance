@@ -25,11 +25,7 @@ define(["webjars!jquery.js"], function() {
         } else {
             for (var i = 0; i < points.length; i++) {
                 var point = $(points[i]);
-                if (i == 0 && !point.hasClass("action")) {
-                    point.show();
-                } else {
-                    this.remainingPoints.push(point);
-                }
+                this.remainingPoints.push(point);
             }
             this.remainingPoints.reverse();
         }

@@ -2,9 +2,9 @@ package controllers
 
 import play.api.mvc._
 import utils.PerformanceTester
-import play.api.libs.iteratee.{Enumeratee, Concurrent}
+import play.api.libs.iteratee.{Enumerator, Enumeratee, Concurrent}
 import play.api.libs.json._
-import play.api.libs.EventSource
+import play.api.libs.{Comet, EventSource}
 import play.api.libs.EventSource._
 import play.api.libs.concurrent.Akka
 import play.api.Play.current
@@ -20,6 +20,7 @@ import examples._
 import scala.util.Failure
 import scala.Some
 import scala.util.Success
+import play.api.templates.{HtmlFormat, Html}
 
 object Benchmarks extends Controller {
 
@@ -40,6 +41,43 @@ object Benchmarks extends Controller {
 
   def csrf1 = benchmark(CsrfSolutions.QueryString.performanceTest)
   def csrf2 = benchmark(CsrfSolutions.CsrfAction.performanceTest)
+
+  def runAll = Action {
+    val allTests = List(
+      AsyncVsSync.performanceTest,
+      ExecutionContexts.performanceTest,
+      CustomContexts.immediatePerformanceTest,
+      CustomContexts.trampolineTest,
+      ResourceManagement.DumbController.performanceTest,
+      ResourceManagement.SmartController.performanceTest,
+      Prerender.Static.performanceTest,
+      Prerender.AlmostStatic.performanceTest,
+      Routing.performanceTest,
+      CsrfSolutions.QueryString.performanceTest,
+      CsrfSolutions.CsrfAction.performanceTest
+    )
+    val messages = Enumerator("Warming up performance test 1 of " + allTests.size) >>>
+      Enumerator.unfoldM[List[PerformanceTester[_]], String](allTests) { tests =>
+        tests.headOption match {
+          case Some(test) =>
+            test.start().results.map { _ =>
+              val message = if (tests.tail.isEmpty) {
+                "All performance tests are warmed up."
+              } else {
+                "Warming up performance test " + (allTests.size - tests.tail.size + 1) + " of " + allTests.size
+              }
+              Some((tests.tail, message))
+            }
+          case None => Future.successful(None)
+        }
+      } &> Enumeratee.map(msg => Html("<li>" + HtmlFormat.escape(msg) + "</li>"))
+    val content =
+      Enumerator(Html(Array.fill[Char](5 * 1024)(' ').mkString + "<html><body><ul>")) >>>
+        messages >>>
+        Enumerator(Html("</ul></body></html>"))
+
+    Ok.chunked(content)
+  }
 
   case class Event(name: String, data: JsValue)
   object Event {
@@ -88,7 +126,7 @@ object Benchmarks extends Controller {
           shutDown()
           channel.push(Event("results", TestResults(results.results.map(TestResult.tupled))))
         case Failure(e) =>
-          Logger.info("Benchmark error")
+          Logger.info("Benchmark error: ", e)
           shutDown()
           channel.push(Event("error", TestError(e.getClass.getName, Option(e.getMessage))))
       }

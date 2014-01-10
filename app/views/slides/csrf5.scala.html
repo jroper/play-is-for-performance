@@ -1,6 +1,6 @@
 @main("CSRF", routes.Slides.csrf6, routes.Slides.csrf4) {
     @points {
-        @point("Solution 2: Use CSRFCheck action instead of filter")
+        @point.show("Solution 2: Use CSRFCheck action instead of filter")
         @point("CSRFCheck is invoked after the body parser has parsed the body")
     }
     @item(includeCode("app/examples/CsrfSolutions.scala", "csrf-check-action"))

@@ -24,18 +24,18 @@ object CsrfSolutions {
 
     //#query-string
     def performanceTest = PerformanceTester.compare(1000)(
-      "Form-Field" -> { _ =>
-        testCsrfFilter(FakeRequest("POST", "/save")
-          .withHeaders("Content-Type" -> "application/x-www-form-url-encoded")
-          .withSession("csrfToken" -> "foo"),
-          defaultBody + "&csrfToken=foo"
-        )
-      },
       "Query-String" -> { _ =>
         testCsrfFilter(FakeRequest("POST", "/save?csrfToken=foo")
           .withHeaders("Content-Type" -> "application/x-www-form-url-encoded")
           .withSession("csrfToken" -> "foo"),
           defaultBody
+        )
+      },
+      "Form-Field" -> { _ =>
+        testCsrfFilter(FakeRequest("POST", "/save")
+          .withHeaders("Content-Type" -> "application/x-www-form-url-encoded")
+          .withSession("csrfToken" -> "foo"),
+          defaultBody + "&csrfToken=foo"
         )
       }
     )
@@ -70,11 +70,11 @@ object CsrfSolutions {
 
     //#csrf-check-test
     def performanceTest = PerformanceTester.compare(1000)(
-      "CSRFFilter" -> { _ =>
-        testCsrfFilter(CSRFFilter()(Action(_ => Ok)))
-      },
       "CSRFCheck-Action" -> { _ =>
         testCsrfFilter(save)
+      },
+      "CSRFFilter" -> { _ =>
+        testCsrfFilter(CSRFFilter()(Action(_ => Ok)))
       }
     )
     //#csrf-check-test
