@@ -2,7 +2,7 @@ package examples
 
 import scala.concurrent.{Await, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
-import utils.PerformanceTester
+import utils.Benchmark
 import scala.concurrent.duration.Duration
 
 object AsyncVsSync {
@@ -16,7 +16,7 @@ object AsyncVsSync {
     Future.reduce(numbers)(_ + _)
   }
 
-  def performanceTest = PerformanceTester.compare(3000, 1 to 10000)(
+  def benchmark = Benchmark.compare(3000, 1 to 10000)(
       "Sync" -> (numbers => syncSum(numbers)),
       "Async" -> (numbers => Await.result(
         asyncSum(numbers.map(Future.successful)),

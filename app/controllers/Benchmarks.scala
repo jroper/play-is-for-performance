@@ -1,7 +1,7 @@
 package controllers
 
 import play.api.mvc._
-import utils.PerformanceTester
+import utils.Benchmark
 import play.api.libs.iteratee.{Enumerator, Enumeratee, Concurrent}
 import play.api.libs.json._
 import play.api.libs.{Comet, EventSource}
@@ -24,7 +24,7 @@ import play.api.templates.{HtmlFormat, Html}
 
 object Benchmarks extends Controller {
 
-  def asyncVsSync = benchmark(AsyncVsSync.performanceTest)
+  def asyncVsSync = benchmark(AsyncVsSync.benchmark)
 
   def executionContexts = benchmark(ExecutionContexts.performanceTest)
 
@@ -44,7 +44,7 @@ object Benchmarks extends Controller {
 
   def runAll = Action {
     val allTests = List(
-      AsyncVsSync.performanceTest,
+      AsyncVsSync.benchmark,
       ExecutionContexts.performanceTest,
       CustomContexts.immediatePerformanceTest,
       CustomContexts.trampolineTest,
@@ -57,7 +57,7 @@ object Benchmarks extends Controller {
       CsrfSolutions.CsrfAction.performanceTest
     )
     val messages = Enumerator("Warming up performance test 1 of " + allTests.size) >>>
-      Enumerator.unfoldM[List[PerformanceTester[_]], String](allTests) { tests =>
+      Enumerator.unfoldM[List[Benchmark[_]], String](allTests) { tests =>
         tests.headOption match {
           case Some(test) =>
             test.start().results.map { _ =>
@@ -99,7 +99,7 @@ object Benchmarks extends Controller {
   implicit def testResultsWrites = Json.writes[TestResults]
   implicit def testErrorWrites = Json.writes[TestError]
 
-  def benchmark(tester: PerformanceTester[_]) = Action {
+  def benchmark(tester: Benchmark[_]) = Action {
 
     Logger.info("Starting benchmark")
 

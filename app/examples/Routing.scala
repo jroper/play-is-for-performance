@@ -1,7 +1,7 @@
 package examples
 
 import play.core.Router
-import utils.PerformanceTester
+import utils.Benchmark
 import play.api.test.Helpers._
 import play.api.test.FakeRequest
 import play.api.mvc.EssentialAction
@@ -41,7 +41,7 @@ object Routing {
     invoke(router, "/other/a")
   }
 
-  def performanceTest = PerformanceTester.compare(10000, ())(
+  def performanceTest = Benchmark.compare(10000, ())(
     "Custom" -> { _ =>
       Custom.setPrefix("/")
       runTest(Custom)

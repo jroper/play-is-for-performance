@@ -2,7 +2,7 @@ package examples
 
 import scala.concurrent.{Await, Future}
 import play.api.mvc._
-import utils.PerformanceTester
+import utils.Benchmark
 import play.api.test._
 import scala.concurrent.duration.Duration
 import play.api.libs.concurrent.Akka
@@ -24,7 +24,7 @@ object ResourceManagement {
 
     def myNonBlockingAction = Action(Ok)
 
-    def performanceTest = PerformanceTester.run(5) {
+    def performanceTest = Benchmark.run(5) {
       for (i <- 1 to 20) invoke(myBlockingAction)
       Await.result(invoke(myNonBlockingAction), Duration.Inf)
     }
@@ -48,7 +48,7 @@ object ResourceManagement {
       Ok
     }
 
-    def performanceTest = PerformanceTester.run(5) {
+    def performanceTest = Benchmark.run(5) {
       for (i <- 1 to 20) {
         invoke(myBlockingAction)
       }

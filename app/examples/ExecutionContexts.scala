@@ -2,7 +2,7 @@ package examples
 
 import scala.concurrent.ExecutionContext
 import java.util.concurrent.{Executors, CountDownLatch}
-import utils.PerformanceTester
+import utils.Benchmark
 
 object ExecutionContexts {
 
@@ -22,7 +22,7 @@ object ExecutionContexts {
     nextAction()
   }
 
-  def asynchronous(latch: CountDownLatch, nextAction: () => Unit)
+  def async(latch: CountDownLatch, nextAction: () => Unit)
                    (implicit ctx: ExecutionContext) = {
     latch.countDown()
     ctx.execute(new Runnable() {
@@ -34,13 +34,13 @@ object ExecutionContexts {
   //#ec-methods
 
   //#ec-test
-  def performanceTest = PerformanceTester.compare(100, 100)(
+  def performanceTest = Benchmark.compare(100, 100)(
     "With-EC" -> { times =>
       withNewEc { implicit ctx =>
         val latch = new CountDownLatch(times)
         asynchronously {
           for (i <- 1 to times) {
-            asynchronous(latch, notSoImportantOp)
+            async(latch, notSoImportantOp)
           }
         }
         latch.await()

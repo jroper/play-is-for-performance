@@ -2,7 +2,7 @@ package examples
 
 import play.api.libs.iteratee.{Step, Enumerator, Iteratee}
 import scala.concurrent.{Await, ExecutionContext}
-import utils.PerformanceTester
+import utils.Benchmark
 import java.util.{ArrayDeque, Deque}
 import scala.concurrent.duration.Duration
 
@@ -31,7 +31,7 @@ object CustomContexts {
   //#immediate-ec
 
   //#immediate-test
-  val immediatePerformanceTest = PerformanceTester.compare(2000, 200)(
+  val immediatePerformanceTest = Benchmark.compare(2000, 200)(
     "Immediate" -> { times =>
       implicit def ec = immediateExecutionContext
       add(times)
@@ -71,7 +71,7 @@ object CustomContexts {
   //#trampoline-ec
 
   //#trampoline-test
-  val trampolineTest = PerformanceTester.compare(200, 2000)(
+  val trampolineTest = Benchmark.compare(200, 2000)(
     "Trampoline" -> { times =>
       implicit def ec = trampolineExecutionContext
       add(times)

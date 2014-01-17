@@ -40,6 +40,7 @@ GET         /customContexts5                     controllers.Slides.customContex
 GET         /customContexts6                     controllers.Slides.customContexts6
 GET         /customContexts7                     controllers.Slides.customContexts7
 GET         /customContexts8                     controllers.Slides.customContexts8
+GET         /customContexts9                     controllers.Slides.customContexts9
 GET         /customContextsBenchmark1            controllers.Benchmarks.customContexts1
 GET         /customContextsBenchmark2            controllers.Benchmarks.customContexts2
 
@@ -54,6 +55,7 @@ GET         /prerender1                          controllers.Slides.prerender1
 GET         /prerender2                          controllers.Slides.prerender2
 GET         /prerender3                          controllers.Slides.prerender3
 GET         /prerender4                          controllers.Slides.prerender4
+GET         /prerender5                          controllers.Slides.prerender5
 GET         /prerenderBenchmark1                 controllers.Benchmarks.prerender1
 GET         /prerenderBenchmark2                 controllers.Benchmarks.prerender2
 

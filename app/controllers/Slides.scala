@@ -39,6 +39,7 @@ object Slides extends Controller {
   def customContexts6 = slide(slides.customContexts6)
   def customContexts7 = slide(slides.customContexts7)
   def customContexts8 = slide(slides.customContexts8)
+  def customContexts9 = slide(slides.customContexts9)
 
   def resourceManagement1 = slide(slides.resourceManagement1)
   def resourceManagement2 = slide(slides.resourceManagement2)
@@ -49,6 +50,7 @@ object Slides extends Controller {
   def prerender2 = slide(slides.prerender2)
   def prerender3 = slide(slides.prerender3)
   def prerender4 = slide(slides.prerender4)
+  def prerender5 = slide(slides.prerender5)
 
   def routing1 = slide(slides.routing1)
   def routing2 = slide(slides.routing2)

@@ -1,6 +1,6 @@
 package examples
 
-import utils.PerformanceTester
+import utils.Benchmark
 import play.api.mvc._
 import play.api.libs.iteratee.Enumerator
 import play.api.test._
@@ -23,7 +23,7 @@ object CsrfSolutions {
     }
 
     //#query-string
-    def performanceTest = PerformanceTester.compare(1000)(
+    def performanceTest = Benchmark.compare(1000)(
       "Query-String" -> { _ =>
         testCsrfFilter(FakeRequest("POST", "/save?csrfToken=foo")
           .withHeaders("Content-Type" -> "application/x-www-form-url-encoded")
@@ -69,7 +69,7 @@ object CsrfSolutions {
     //#csrf-check-action
 
     //#csrf-check-test
-    def performanceTest = PerformanceTester.compare(1000)(
+    def performanceTest = Benchmark.compare(1000)(
       "CSRFCheck-Action" -> { _ =>
         testCsrfFilter(save)
       },

@@ -1,3 +1,6 @@
-@main("Pre rendering static pages", routes.Slides.routing1, routes.Slides.prerender3) {
-    @benchmark(routes.Benchmarks.prerender2)
+@main("Pre rendering static pages", routes.Slides.prerender5, routes.Slides.prerender3) {
+    @points {
+        @point.show("Multiple versions, eg different languages")
+    }
+    @item(includeCode("app/examples/Prerender.scala", "almost"))
 }

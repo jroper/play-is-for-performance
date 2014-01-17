@@ -1,9 +1,3 @@
-@main("Avoiding context switches", routes.Slides.resourceManagement1, routes.Slides.customContexts7) {
-    @points {
-        @point("Immediate execution contexts not often useful")
-        @point("Trampoline execution contexts useful for very short tasks")
-        @point("Both undermine the safety provided by execution context passing")
-        @point("Beware! Never block!")
-    }
-    @imagePoint(440, routes.Assets.at("images/scared-cat.png"))
+@main("Avoiding context switches", routes.Slides.customContexts9, routes.Slides.customContexts7) {
+    @benchmark(routes.Benchmarks.customContexts2)
 }

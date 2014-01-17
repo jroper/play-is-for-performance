@@ -55,7 +55,7 @@ define(["webjars!jquery.js", "webjars!Chart.js"], function() {
                 self.resultsElem.empty();
                 self.resultsElem.show();
 
-                var canvas = $("<canvas>").attr({width: 400, height: 400});
+                var canvas = $("<canvas>").attr({width: 400, height: 300});
                 self.resultsElem.append(canvas);
 
                 var ctx = canvas.get(0).getContext("2d");
@@ -70,7 +70,7 @@ define(["webjars!jquery.js", "webjars!Chart.js"], function() {
                     maxTime = Math.max(maxTime, result.time);
                 }
 
-                var stepWidth = Math.ceil(maxTime / 20)
+                var stepWidth = Math.ceil(maxTime / 15)
 
                 new Chart(ctx).Bar({
                     labels: labels,
@@ -82,7 +82,7 @@ define(["webjars!jquery.js", "webjars!Chart.js"], function() {
                 }, {
                     scaleOverride: true,
                     scaleStartValue: 0,
-                    scaleSteps: 21,
+                    scaleSteps: 16,
                     scaleStepWidth: stepWidth
                 });
 

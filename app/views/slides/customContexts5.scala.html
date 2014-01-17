@@ -5,10 +5,7 @@
             @points {
                 @point("Invokes run immediately...")
                 @point("Unless invoked recursively")
-                @point {
-                    Then places tasks in a queue to invoke sequentially
-                    @includeCode("app/examples/CustomContexts.scala", "trampoline-ec")
-                }
+                @point("Then places tasks in a queue to invoke sequentially")
             }
         }
     }

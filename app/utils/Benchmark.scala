@@ -4,21 +4,21 @@ import scala.concurrent._
 import scala.Predef._
 import java.util.concurrent.atomic.AtomicBoolean
 
-object PerformanceTester {
+object Benchmark {
   @volatile var executionContext: Option[ExecutionContextExecutorService] = None
 
   def compare[I](times: Int, input: => I)(tests: (String, I => Unit)*) =
-    new PerformanceTester(times, input, tests)
+    new Benchmark(times, input, tests)
 
   def compare(times: Int)(tests: (String, Unit => Unit)*) =
-    new PerformanceTester(times, (), tests)
+    new Benchmark(times, (), tests)
 
   def run(times: Int)(test: => Unit) = {
-    new PerformanceTester(times, (), Seq("Test" -> ((u: Unit) => test)))
+    new Benchmark(times, (), Seq("Test" -> ((u: Unit) => test)))
   }
 }
 
-class PerformanceTester[I](times: Int, input: => I, tests: Seq[(String, I => Unit)]) {
+class Benchmark[I](times: Int, input: => I, tests: Seq[(String, I => Unit)]) {
 
   def start(): PerformanceTestProgressAccessor = {
 
@@ -28,7 +28,7 @@ class PerformanceTester[I](times: Int, input: => I, tests: Seq[(String, I => Uni
       case (testName, test) => (testName, test, new Progress)
     }
 
-    implicit val ec = PerformanceTester.executionContext.getOrElse(ExecutionContext.global)
+    implicit val ec = Benchmark.executionContext.getOrElse(ExecutionContext.global)
 
     val future = Future {
       val results = testsWithProgress.map {

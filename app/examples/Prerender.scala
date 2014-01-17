@@ -1,7 +1,7 @@
 package examples
 
 import play.api.mvc._
-import utils.PerformanceTester
+import utils.Benchmark
 import play.api.test.Helpers._
 import play.api.test.FakeRequest
 import play.api.i18n.Lang
@@ -21,7 +21,7 @@ object Prerender {
       Action(result)
     }
 
-    def performanceTest = PerformanceTester.compare(1000, ())(
+    def performanceTest = Benchmark.compare(1000, ())(
       "Pre-rendered" -> { _ =>
         contentAsString(prerendered(FakeRequest()))
       },
@@ -48,7 +48,7 @@ object Prerender {
       Action(req => results(Lang.preferred(req.acceptLanguages)))
     }
 
-    def performanceTest = PerformanceTester.compare(1000, ())(
+    def performanceTest = Benchmark.compare(1000, ())(
       "Pre-rendered" -> { _ =>
         contentAsString(prerendered(FakeRequest()))
       },
